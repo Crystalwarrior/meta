@@ -8,6 +8,10 @@ Please add to this list if you think of any.
  * Creating `TCPObject` instances
  * References to `servAuthTCPObj`
  * BLID or name specific if statements (`if(%client.bl_id == 16807)`)
+ * Setting `*.isAdmin`
+ * Setting `*.isSuperAdmin`
+ * Setting `$Pref::Server::AutoAdminList`
+ * Setting `$Pref::Server::AutoSuperAdminList`
  * Usage of `FreeMemoryDump()`
  * Usage of `videoSetGammaCorrection()`
  * Usage of `setVerticalSync()`
