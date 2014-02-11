@@ -134,3 +134,18 @@
 10:19 AM - Port: I really don't want to get into sharding a database geographically
 10:19 AM - Port: having the database on the other side of the world would be unacceptably slow internally
 10:19 AM - Port: and while the majority of people aren't in US, it is true that the majority of BL players are in the US
+10:21 AM - Lugnut: Who will fund that? What kind of resources will be needed on the server machines?
+10:22 AM - Port: Hmm
+10:22 AM - Port: Chat server doesn't need to be computationally fast; it merely routes chat messages around (mainly) and responds to HTTP requests by serving files
+10:22 AM - Port: Mods server just needs a lot of storage space and fast networking for downloads
+10:23 AM - Lugnut: Sounds like these aren't going to be very expensive.
+10:23 AM - Port: Indeed
+10:23 AM - Lugnut: Will donations be accepted?
+10:24 AM - Port: Chat server priority: Disk speed
+10:24 AM - Lugnut: Thoughts on off-site logging?
+10:24 AM - Port: Mods server priority: Disk speed, network speed, storage space
+10:24 AM - Port: Also, sure
+10:25 AM - Port: Probably just some simple logging service ,actually
+10:26 AM - Port: We don't need a database or special servers for this, just some event logging service that uses JSON or something
+10:27 AM - Lugnut: Might be a good idea - you control all the primary servers, an attacker trying to compromise the logs would have to figure out who the hell has them
+10:27 AM - Lugnut: I guess running netstat would give me up pretty quickly
