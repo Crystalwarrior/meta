@@ -1,0 +1,15 @@
+     +---------------------------------------------+
+     |                 Main server                 |
+     |  Core database               Chat database  |
+     |       |       \                     \       |
+  ----- Mods frontend \               Chat server -----
+     |  (HTTP)         \              (TCP)        |
+     |                  \                          |
+     |             /-----+                         |
+  ----- Mods backend    /                 Website -----
+     |  (HTTP)        /                   (HTTP)   |
+     |          +----+                             |
+     |         /                                   |
+  ----- Mods API                                   |
+     |  (HTTP)                                     |
+     +---------------------------------------------+
