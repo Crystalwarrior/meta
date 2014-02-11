@@ -1,0 +1,131 @@
+[12:02:13 PM] Port: there
+[12:02:21 PM] Port: look
+[12:02:22 PM] Port: https://github.com/bam-org/bam-org.github.io/commit/720ed0d981e762f52d52ad2b44f33756f8b7aa24
+[12:02:26 PM] Port: http://bam-org.github.io/contact.html
+[12:04:41 PM] Port: ?
+[12:03:08 PM] Lugnut: looks good
+[12:03:35 PM] Port: https://github.com/Pacnetty?tab=repositories
+[12:03:37 PM] Port: pacnet what are you doing
+[12:03:51 PM] Lugnut: we should get a favicon.ico
+[12:03:57 PM] Port: yep
+[12:04:14 PM] Lugnut: looks like he be forkin shit
+[12:09:20 PM] Port: I love Opera now
+[12:09:26 PM] Port: http://www.jonathantneal.com/blog/understand-the-favicon/
+[12:09:27 PM] Port: "Opera, not wanting to take sides, will choose from any of the available icons at complete random."
+[12:14:26 PM] Lugnut: brilliant
+[12:16:40 PM] Lugnut: can people without a github account comment on github stuff?
+[12:16:49 PM] Port: nope
+[12:16:51 PM] Lugnut: disregarding OAuth through google or some shit
+[12:16:52 PM] Port: they can post on the topic though ;)
+[12:16:55 PM] Lugnut: well that's not very helpful
+[12:16:56 PM] Lugnut: oh
+[12:16:59 PM] Port: indeed
+[12:17:05 PM] Port: but more opinions always help
+[12:17:10 PM] Port: and if there's anything significant I can quote it on the pull request
+[12:38:51 PM] Lugnut: someone should make torquescript lint
+[12:39:16 PM] Port: I could make that if Valcle finishes what we'll need for the add-on gallery
+[12:40:59 PM] Lugnut: valcle?
+[12:43:19 PM] Port: computermix
+[12:54:16 PM] Port: https://github.com/bam-org/System_BAM/commit/eae4cef302135a9e41eeddc38ee8cc6ce1852913
+[12:55:16 PM] Lugnut: i don't read gui code, port
+[12:55:19 PM] Lugnut: i need a picture
+[12:55:37 PM] Port: it's the gui code for the mockup in that issue
+[12:55:44 PM] Port: no clue if i'll use it or not
+[12:55:48 PM] Port: just so it's on github
+[12:57:44 PM] Port: Here's the plan for admin management in server control
+[12:57:59 PM] Port: BAM won't let you set people as manual admin
+[12:59:22 PM] Port: The admin tab has a button to add a new admin, to manage roles and has a list of BLIDs and their role (as a dropdown containing None, Admin, Super Admin or a custom rule)
+[12:59:59 PM] Lugnut: so literally the same as RTB except /without/ manual functionality?
+[1:00:00 PM] Port: The dialog to add a new admin lets you choose from the player list or to enter a BLID
+[1:00:10 PM] Port: Nope, you missed the "role" part
+[1:00:17 PM] Lugnut: ooooh
+[1:00:19 PM] Port: You can define a custom role and assing it to people
+[1:00:23 PM] Port: assign*
+[1:00:35 PM] Lugnut: "Privileged builder" or something for when you want people to be able to leave your TDM
+[1:00:41 PM] Port: Yep
+[1:00:43 PM] Lugnut: is this gonna use that permissions script that... nullable made?
+[1:00:48 PM] Port: A role is just a preset list of permissions
+[1:00:55 PM] Port: Nah, I'm not going to reuse anything, this is a bit simpler than that anyway
+[1:01:07 PM] Port: There's no permissions on individual clients, role inheritance or anything like that
+[2:02:39 PM] Lugnut: we should have a push notification service
+[2:02:44 PM] Lugnut: tie it into the chat server
+[2:02:55 PM] Port: elaborate?
+[2:03:01 PM] Lugnut: when an add-on is updated (or a mod utilizes it - we could do apis) it wou
+[2:03:06 PM] Lugnut: TCP connection to the chat server
+[2:03:18 PM] Lugnut: upon event, chat server sends a notification message to the client
+[2:03:21 PM] Lugnut: who displays it
+[2:03:33 PM] Lugnut: allows for nigh-instantaneous notification delivery.
+[2:03:38 PM] Lugnut: say...
+[2:03:47 PM] Lugnut: a server host runs a mod that notifies them when someone bans a person
+[2:04:01 PM] Lugnut: it could also be used for when mods are updated
+[2:04:15 PM] Lugnut: say out of all the users online, it pushes notifications to 10 a second
+[2:04:17 PM] Lugnut: if the message was.. say
+[2:04:30 PM] Lugnut: {"UPDATENOTIF" : "Script_Derp"}
+[2:04:39 PM] Lugnut: That's what, ~20 characters?
+[2:04:46 PM] Lugnut: 10 * 20 = 200
+[2:04:52 PM] Lugnut: 200 bytes per second,
+[2:05:03 PM] Lugnut: we can reach 600 people and notify them in under a minute when an add-on gets updated
+[2:05:09 PM] Lugnut: they can update on the spot
+[2:05:32 PM] Lugnut: with the right shit in place, and if the mod does not include content like models, they could even update the mod without rebooting the server
+[2:05:47 PM] Lugnut: backpacking off of my "best case scenario for mod update review"
+[2:06:04 PM] Lugnut: add on pushes update to user downloading and using update could be less than 10 minutes in time
+[2:06:09 PM] Lugnut: that is /record fucking speed/ port
+[2:06:30 PM] Lugnut: we could have opt-in auto-updates
+[2:06:39 PM] Lugnut: so when a mod is updated it just downloads it to the server and runs it
+[2:06:51 PM] Lugnut: that would be a hit to security
+[2:07:01 PM] Lugnut: so only auto-exec mods that are approved by privileged reviewers.
+[2:07:23 PM] Lugnut: theoretically a lower level reviewer could push a malicious update, which would be bad and whatnot
+[2:07:39 PM] Lugnut: actually no the automated systems would catch it
+[2:08:01 PM] Lugnut: android has push notifications
+[2:08:14 PM] Lugnut: i've used push notifications that send data in literally less than a second
+[2:08:23 PM] Lugnut: i click the send button and the fucking thing is on my device by the time i look down
+[2:09:08 PM] Lugnut: we could have remote server management
+[2:09:21 PM] Lugnut: that could just be a flat out feature of BAM
+[2:09:33 PM] Lugnut: web based interface to chat, bans, etc
+[2:09:40 PM] Lugnut: like RTB hosting
+[2:09:43 PM] Lugnut: except less eval
+[2:09:46 PM] Lugnut: and more easier setup
+[2:10:20 PM] Lugnut: shit that remote server management feature
+[2:10:35 PM] Lugnut: if we lay that out as a plan for something to do that right there would be the defining RTB trumping feature // I mean the feature that would be new and creative over RTB
+[2:11:29 PM] Lugnut: yes no
+[2:11:36 PM] Lugnut: ill update the about page if you okay that plan
+[2:12:02 PM] Port: using separate processes for everything complicates this a lot though
+[2:12:18 PM] Port: it would be /a lot/ simpler if it was one process routing things
+[2:12:18 PM] Lugnut: how so
+[2:12:22 PM] Lugnut: no
+[2:12:24 PM] Lugnut: po-
+[2:12:24 PM] Lugnut: oh
+[2:12:26 PM] Lugnut: no
+[2:12:28 PM] Lugnut: hmm
+[2:12:30 PM] Lugnut: yeaaah
+[2:12:43 PM] Port: using the "chat" socket to send notifications about mods is.. really odd
+[2:12:54 PM] Lugnut: it would be a general notification system
+[2:13:00 PM] Lugnut: not just mods
+[2:13:01 PM] Port: basically
+[2:13:05 PM] Lugnut: it would tie in with the api
+[2:13:07 PM] Port: there should be the following component:
+[2:13:21 PM] Lugnut: the reason why i suggested it is because the clients with the mod will already have an active TCP connection to the chat server
+[2:13:28 PM] Lugnut: it just bundles in
+[2:13:31 PM] Port: * TCP line-based JSON transport which is a persistent connection to Blockland clients/servers that routes chat, notifications, etc
+[2:13:39 PM] Port: * static HTTP site (main website)
+[2:13:48 PM] Port: * dynamic HTTP sites for mods backend, frontend, API
+[2:13:37 PM] Lugnut: yes
+[2:13:46 PM] Lugnut: the "chat" server because that's what it does primarily
+[2:13:54 PM] Port: we should probably rename the chat server.
+[2:14:00 PM] Lugnut: no
+[2:14:04 PM] Port: :/
+[2:14:05 PM] Lugnut: it's primary function /is chat/
+[2:14:09 PM] Lugnut: i mean
+[2:14:13 PM] Port: also
+[2:14:17 PM] Port: i guess we could do this:
+[2:14:18 PM] Lugnut: i guess you could name it like "Stream server" or something
+[2:14:23 PM] Port: chat server listens on following hosts:
+[2:14:30 PM] Port: 0.0.0.0:someport
+[2:14:33 PM] Port: 127.0.0.1:someotherport
+[2:14:42 PM] Port: Blockland clients/servers connect to the former
+[2:14:52 PM] Lugnut: depending on where the connection originates determines what kind of stuff it can do?
+[2:14:52 PM] Port: mods systems can connect to the latter and send data and a client id
+[2:14:56 PM] Lugnut: yes
+[2:14:56 PM] Port: which it'll relay over
+[2:15:11 PM] Port: anyway i've gotta go for today; save this chat
+[2:15:17 PM] Lugnut: ok
