@@ -23,14 +23,14 @@ Watch out for unexpected return values (either intentionally or unintentionally)
 
     ==> $a = 0.7;
     ==> echo(!$a);
-    1               // 0.7 is interpreted as 0
+    1 // 0.7 is interpreted as 0
     ==> echo(!!$a);
     0
     
     ==> echo(!0.7);
-    0               // 0.7 is interpreted as 1
+    0 // 0.7 is interpreted as 1
     ==> echo(!!0.7);
-    0
+    1
 
 #### Object ID references ignore non-numeric characters
 
