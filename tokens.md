@@ -22,11 +22,16 @@ Please add to this list if you think of any.
 
  * Add-Ons/\*_\*/\*
  * base/\*\*/\*
+ * config/client/Avatar/\*.cs
+ * config/client/MiniGameFavorites/\*.cs
  * config/client/avatarColors.cs
  * config/client/config.cs
+ * config/client/Favorites.cs
  * config/client/prefs.cs
- * config/client/prefs-trustList.cs
+ * config/client/prefs-trustList.txt
  * config/server/ADD\_ON\_LIST.cs
+ * config/server/BANLIST.txt
+ * config/server/colorSet.txt
  * config/server/musicList.cs
  * config/server/prefs.cs
  * \*
