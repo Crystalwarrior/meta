@@ -5,16 +5,48 @@ Please add to this list if you think of any.
 
 ## Suspicious tokens
 
- * Usage of `eval()`
- * Usage of `call()`
- * `fileDelete()`
  * Creating `TCPObject` instances
+ * References to `servAuthTCPObj`
  * `FileObject` instances opening base/* folders for writing or appending
  * BLID or name specific if statements (`if(%client.bl_id == 16807)`)
+ * Usage of `setKey()`
+ * Usage of `FreeMemoryDump()`
+ * Usage of `videoSetGammaCorrection()`
+ * Usage of `setVerticalSync()`
+ * Usage of `setProcessorAffinityMask()`
+ * Usage of `getClipboard()`
+ * Usage of `quit()`
+ * Usage of `call()`
+ * Usage of `eval()`
+ * Usage of `deleteVariables()`
+ * Usage of `createPath()`
+ * Usage of `fileDelete()`
+ * Usage of `fileCopy()`
+ * Usage of `upnpAdd()`
+ * Usage of `killAllQuotaObjects()`
+ * Usage of `deleteDataBlocks()`
+ * Usage of `aiAddPlayer()`
+ * Usage of `aiConnect()`
+ * Usage of `gotoWebPage()`
+ * Usage of `secureCommandToClient()`
+ * Usage of `secureCommandToAll()`
+ * Usage of `secureCommandToAllExcept()`
+ * Usage of `SteamAPI_Init()`
+ * Usage of `SteamAPI_Shutdown()`
+ * Usage of `steamGetAchievement()`
+ * Usage of `steamClearAchievement()`
+ * Usage of `SteamGetAuthSessionTicket()`
 
 ## Dangerous tokens
 
- * `crash()`
+ * Usage of `crash()`
+ * Usage of `SteamOfflineUnlock()`
+ * Usage of `SteamUnlock()`
+ * Usage of `Unlock()`
+ * Usage of `lock()`
+ * Usage of `setMyBLID()`
+ * Usage of `getPassPhraseResponse()`
+ * Usage of `setKeyDat()`
 
 ## Suspicious file paths
 
