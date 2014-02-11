@@ -7,7 +7,6 @@ Please add to this list if you think of any.
 
  * Creating `TCPObject` instances
  * References to `servAuthTCPObj`
- * `FileObject` instances opening base/* folders for writing or appending
  * BLID or name specific if statements (`if(%client.bl_id == 16807)`)
  * Usage of `setKey()`
  * Usage of `FreeMemoryDump()`
