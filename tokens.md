@@ -14,7 +14,6 @@ Please add to this list if you think of any.
  * Setting `$Pref::Server::AutoSuperAdminList`
  * Usage of `FreeMemoryDump()`
  * Usage of `videoSetGammaCorrection()`
- * Usage of `setVerticalSync()`
  * Usage of `setProcessorAffinityMask()`
  * Usage of `getClipboard()`
  * Usage of `quit()`
