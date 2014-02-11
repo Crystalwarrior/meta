@@ -18,9 +18,11 @@ Please add to this list if you think of any.
 
 ## Suspicious file paths
 
+Keep in mind that this does *not* auto-fail submissions, it merely warns reviewers with a list of triggered paths.
+
 #### Writing
 
- * Add-Ons/\*_\*/\*
+ * Add-Ons/\*_\*/\*\*/\*
  * base/\*\*/\*
  * config/client/Avatar/\*.cs
  * config/client/MiniGameFavorites/\*.cs
@@ -34,6 +36,12 @@ Please add to this list if you think of any.
  * config/server/colorSet.txt
  * config/server/musicList.cs
  * config/server/prefs.cs
+ * saves/\*\*/\*
+ * screenshots/\*\*/\*
+ * \*
+
+#### Reading
+
  * \*
 
 ## Resources
