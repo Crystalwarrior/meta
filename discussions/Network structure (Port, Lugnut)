@@ -1,0 +1,136 @@
+9:49 AM - Lugnut: Maybe flesh out the backend? Write down some ideas in -meta? Maybe make a build.sh script designed to build and launch any piece of bam?? I dunno.
+9:49 AM - Lugnut: You might want to get the whole plan down somewhere so you don't forget it or some shit
+9:50 AM - Port: I kinda should merge bam-chat and bam-mods into one repository
+9:50 AM - Port: because like
+9:50 AM - Port: I don't really want to run separate processes for them at this point
+9:51 AM - Port: they should rather be on the same server/domain
+9:51 AM - Port: using the asme database
+9:51 AM - Lugnut: Well now
+9:51 AM - Lugnut: There is a benefit to keeping them separate
+9:51 AM - Port: unless I can somehow route DNS entries to different processes
+9:51 AM - Lugnut: If one goes down, the other doesn't
+9:51 AM - Port: i.e. chat.<domain>, mods.<domain>
+9:51 AM - Port: they must use the same database though
+9:52 AM - Lugnut: You really want stability for chat - if the mods go down for a flight no big deal
+9:52 AM - Port: well okay
+9:52 AM - Port: but yeah
+9:52 AM - Port: we'll be running:
+9:52 AM - Lugnut: what is chat gonna do with a database?
+9:52 AM - Port: * a web server
+9:52 AM - Port: * a chat node.js server
+9:52 AM - Port: er
+9:52 AM - Port: being more specific
+9:52 AM - Port: * a HTTP server for main website
+9:53 AM - Port: * a HTTP server for frontend mods website
+9:53 AM - Port: * a HTTP server for backend mods website (administration)
+9:53 AM - Port: why am I writing those as separate
+9:53 AM - Port: okay
+9:53 AM - Lugnut: 3 different servers is a good plan
+9:53 AM - Lugnut: No
+9:53 AM - Lugnut: It's good
+9:53 AM - Lugnut: Security wise it's good
+9:53 AM - Lugnut: Compromise one and the whole thing /doesn't/ get shot to hell
+9:53 AM - Port: still though
+9:53 AM - Lugnut: PS can I be netsec guy
+9:53 AM - Port: it doesn't really make sense for the backend to be running without the frontend?
+9:54 AM - Port: okay
+9:54 AM - Port: it does
+9:54 AM - Port: but
+9:54 AM - Lugnut: Yes it does
+9:54 AM - Port: alright
+9:54 AM - Port: * HTTP server for main website (domain)
+9:54 AM - Lugnut: They all access the same database
+9:54 AM - Port: * HTTP server for mods frontend (mods.domain)
+9:54 AM - Lugnut: That's the only common denominator
+9:54 AM - Port: * HTTP server for mods backend (core.mods.domain?)
+9:54 AM - Port: * HTTP server for mods API (api.mods.domain?)
+9:54 AM - Lugnut: addons.domain*
+9:54 AM - Port: * TCP server for chat API (chat.domain)
+9:55 AM - Lugnut: admin.addons.domain
+9:55 AM - Port: * MongoDB databaes server
+9:55 AM - Port: but yeah
+9:55 AM - Port: that's what we'll be exposing, database-wise
+9:55 AM - Port: i mean, network-wise
+9:55 AM - Lugnut: Mods makes sense, but we're technically dealing in addons, lets keep it right
+9:55 AM - Lugnut: Jesus that's a lot of points of failure
+9:55 AM - Lugnut: Okay yeah
+9:55 AM - Port: the good part is
+9:55 AM - Port: they're all completely separated
+9:56 AM - Port: the bad part is
+9:56 AM - Port: they all depend on a shared database server
+9:56 AM - Lugnut: Actually, the database won't be internet accessable, right?
+9:56 AM - Port: nope
+9:56 AM - Port: it's just internal
+9:56 AM - Lugnut: Port, why does the chat need a database?
+9:56 AM - Port: storing user settings, friends lists, group memberships, etc
+9:57 AM - Lugnut: Is /any/ of that actually relevant to anything else, particularly the mods?
+9:57 AM - Lugnut: Hint: no
+9:57 AM - Lugnut: Keep that shit separate too. Minimize the odds of total compromisation.
+9:57 AM - Lugnut: I say we keep offsite logs and backups as well.
+9:58 AM - Lugnut: Off and onsite, that is
+9:58 AM - Lugnut: Cause onsite is easier to access.
+9:58 AM - Lugnut: Offsite could be write only, if that makes sense
+10:00 AM - Port: I'm writing a graph right now
+10:00 AM - Lugnut: Log this down into meta, I'm on mobile and can't
+10:00 AM - Lugnut: Writing a graph?
+10:00 AM - Lugnut: A flowchart?
+10:00 AM - Lugnut: Mindmap?
+10:00 AM - Port: you'll see
+10:02 AM - Lugnut: I want to tie cryptography into this somehow as well...
+10:07 AM - Port: https://raw2.github.com/bam-org/bam-meta/master/network-structure.txt
+10:07 AM - Lugnut: My least favorite part of installing a new linux distro is the first fucking apt-get dist-upgrade
+10:08 AM - Lugnut: Always has to upgrade like 100 fucking packages
+10:08 AM - Port: (requires monospace)
+10:08 AM - Port: also yeah, lol
+10:08 AM - Lugnut: The website will be the part where you download stuff? Like the github.io site?
+10:08 AM - Port: yup
+10:08 AM - Lugnut: Looks good.
+10:09 AM - Port: minimal exposed services
+10:09 AM - Port: though
+10:09 AM - Port: how are we going to handle this on a routing level?
+10:09 AM - Lugnut: This way if anything goes down or gets DDOSed, maybe they'll forget about the other server :/
+10:09 AM - Port: can DNS be set up to go to a specific port?
+10:09 AM - Port: maybe we should use multiple servers for different services?
+10:09 AM - Lugnut: DNS is just a name, port
+10:10 AM - Lugnut: It points to an IP
+10:10 AM - Port: yeah, I know
+10:10 AM - Port: actually
+10:10 AM - Lugnut: However
+10:10 AM - Lugnut: For webservers
+10:10 AM - Port: we /have/ to use multiple servers
+10:10 AM - Port: unless we're going to do a wrapper process
+10:10 AM - Port: that intercepts TCP connections and routes them to other processes based on "Host: ..."
+10:10 AM - Port: but that'd only work for HTTP, of course
+10:11 AM - Lugnut: That's a thing
+10:11 AM - Port: and is a really hacky way of doing it which I don't really feel like doing
+10:11 AM - Lugnut: Apache webserver does that, I can't remember what it's called though
+10:11 AM - Port: Problem (well, weird routing issue):
+10:11 AM - Port: * Client connects to chat.domain:80
+10:12 AM - Port: * Since *.domain go to the same IP, it accesses.. an error, since there's no process for chat.domain, or something
+10:12 AM - Lugnut: A load balancer or something then???
+10:13 AM - Lugnut: Put up yet another server???
+10:13 AM - Lugnut: That seems like overkill...
+10:13 AM - Port: Technically we could have separate severs for each exposed piece
+10:15 AM - Port: Something that would work:
+10:15 AM - Port: * One physical server for general and chat
+10:15 AM - Port: ---- HTTP server for website
+10:15 AM - Port: ---- TCP server for chat
+10:15 AM - Port: ---- Unexposed chat database
+10:15 AM - Port: * One physical server for mods
+10:15 AM - Port: ---- HTTP server for mods frontend
+10:15 AM - Port: ---- HTTP server for mods backend
+10:15 AM - Port: ---- HTTP server for mods API
+10:16 AM - Port: ---- Unexposed mods database
+10:16 AM - Port: ^ Since that only uses HTTP servers, we can do HOST routing on that
+10:16 AM - Lugnut: Be sure to log this chat down.
+10:17 AM - Lugnut: Can we refer to the repos as -[name] so "log the chat in -meta, port!"
+10:17 AM - Port: okay
+10:17 AM - Lugnut: That sounds good though
+10:18 AM - Lugnut: So you're planning on real servers, not just heroku apps?
+10:18 AM - Port: Well, not two separate physical machines
+10:18 AM - Port: But two separate virtual servers with their own separate IP
+10:18 AM - Lugnut: where will they be hosted? US, I presumr
+10:18 AM - Port: yeah
+10:19 AM - Port: I really don't want to get into sharding a database geographically
+10:19 AM - Port: having the database on the other side of the world would be unacceptably slow internally
+10:19 AM - Port: and while the majority of people aren't in US, it is true that the majority of BL players are in the US
