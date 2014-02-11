@@ -13,3 +13,5 @@
   ----- Mods API                                   |
      |  (HTTP)                                     |
      +---------------------------------------------+
+
+* One physical server, dual VPS with unique IP addresses.
