@@ -32,10 +32,27 @@ Watch out for unexpected return values (either intentionally or unintentionally)
     ==> echo(!!0.7);
     1
 
-#### Object ID references ignore non-numeric characters
+#### Very allowing string -> number casting
 
-When referring to an object, such as by a method call, any characters in the ID which are not one of 0123456789 will be entirely ignored (unless it's the first character).
+TorqueScript's method for casting a string into a number can allow a lot of unexpected behavior to occur. An empty string or a string that begins with a non-numeric character is interpreted as the value 0. Other strings simply are stripped of all non-numeric characters.
 
+    ==> echo("" + 2);
+    2 // Empty string parsed as 0 (0 + 2)
+    ==> echo("foo" + 6);
+    6 // String starting with non-numeric parsed as 0 (0 + 6)
+    ==> echo("32 foo" + 3);
+    35 // Non-numeric character stripped resulting in 32 (32 + 3)
+
+#### Surprising object reference lookup
+
+When referencing an object, the value is casted to a number (see above). If the result is 0, it'll look up the name from the original value (can contain any non-null characters). Otherwise, it'll look it up by ID. This can be misleading since "32 foo" will lookup by the ID 32, and "foo 32" will lookup by the name "foo 32".
+
+    ==> $b = new ScriptObject(MyObject.getID() @ "test");
+    ==> echo($b.getName());
+    3000test
+    ==> echo("3000test".getName());
+    MyObject
+    
     // Assume that MainMenuGui has an ID of 4552
     ==> "4552 is not my favorite number".delete();
     ==> echo(isObject(MainMenuGui));
