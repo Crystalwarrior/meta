@@ -8,7 +8,6 @@ Please add to this list if you think of any.
  * Creating `TCPObject` instances
  * References to `servAuthTCPObj`
  * BLID or name specific if statements (`if(%client.bl_id == 16807)`)
- * Usage of `setKey()`
  * Usage of `FreeMemoryDump()`
  * Usage of `videoSetGammaCorrection()`
  * Usage of `setVerticalSync()`
@@ -22,7 +21,6 @@ Please add to this list if you think of any.
  * Usage of `fileDelete()`
  * Usage of `fileCopy()`
  * Usage of `upnpAdd()`
- * Usage of `killAllQuotaObjects()`
  * Usage of `deleteDataBlocks()`
  * Usage of `aiAddPlayer()`
  * Usage of `aiConnect()`
@@ -30,14 +28,10 @@ Please add to this list if you think of any.
  * Usage of `secureCommandToClient()`
  * Usage of `secureCommandToAll()`
  * Usage of `secureCommandToAllExcept()`
- * Usage of `SteamAPI_Init()`
- * Usage of `SteamAPI_Shutdown()`
- * Usage of `steamGetAchievement()`
- * Usage of `steamClearAchievement()`
- * Usage of `SteamGetAuthSessionTicket()`
 
 ## Dangerous tokens
 
+ * Usage of `setKey()`
  * Usage of `crash()`
  * Usage of `SteamOfflineUnlock()`
  * Usage of `SteamUnlock()`
@@ -46,6 +40,12 @@ Please add to this list if you think of any.
  * Usage of `setMyBLID()`
  * Usage of `getPassPhraseResponse()`
  * Usage of `setKeyDat()`
+ * Usage of `killAllQuotaObjects()`
+ * Usage of `SteamAPI_Init()`
+ * Usage of `SteamAPI_Shutdown()`
+ * Usage of `steamGetAchievement()`
+ * Usage of `steamClearAchievement()`
+ * Usage of `SteamGetAuthSessionTicket()`
 
 ## Suspicious file paths
 
