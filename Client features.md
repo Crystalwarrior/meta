@@ -16,3 +16,6 @@ Servers can send commands to the client to start and stop a certain audio profil
 #### Access to typed message on death
 
 If a client was typing at the time of death and has opted in, the BAM client will send their message to the server (not as a chat message) as they die.
+
+#### GUI downloading
+A client can have a setting checked whether or not to download custom GUI's.
